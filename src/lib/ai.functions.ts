@@ -29,7 +29,7 @@ export const askAssistant = createServerFn({ method: "POST" })
   })
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context;
-    const last = data.messages[data.messages.length - 1].content;
+    const last = data.messages[data.messages.length - 1]?.content ?? "";
     if (EMERGENCY.test(last)) {
       return {
         mode: "safety" as const,
@@ -46,7 +46,7 @@ export const askAssistant = createServerFn({ method: "POST" })
     if (!patient) throw new Error("The AI assistant is available to patient accounts only.");
 
     const record = JSON.stringify({ patient: profile?.full_name, ...patient, consultations: cons ?? [], prescriptions: rxs ?? [] }, null, 1);
-    const key = process.env.LOVABLE_API_KEY;
+    const key = process.env["LOVABLE_API_KEY"];
     if (!key) {
       return {
         mode: "demo" as const,

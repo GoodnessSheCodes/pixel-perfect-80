@@ -28,7 +28,7 @@ function AuthPage() {
   const [role, setRole] = useState<"patient" | "doctor">("patient");
   const [sent, setSent] = useState(false);
 
-  async function goHome() {
+  async function goHome(): Promise<void> {
     const me = await fetchMe();
     if (me) navigate({ to: homeFor(me.role) });
   }
@@ -51,13 +51,13 @@ function AuthPage() {
     if (password.length < 8) return toast.error("Password must be at least 8 characters");
     const meta: Record<string, string> = { role, full_name: String(f.get("full_name")).trim() };
     if (role === "patient") {
-      meta.username = String(f.get("username") || "").trim().toLowerCase();
-      meta.date_of_birth = String(f.get("dob") || "");
-      if (!meta.date_of_birth) return toast.error("Date of birth is required for identity verification");
+      meta["username"] = String(f.get("username") || "").trim().toLowerCase();
+      meta["date_of_birth"] = String(f.get("dob") || "");
+      if (!meta["date_of_birth"]) return toast.error("Date of birth is required for identity verification");
     } else {
-      meta.hpcsa_number = String(f.get("hpcsa") || "");
-      meta.specialty = String(f.get("specialty") || "");
-      meta.practice_name = String(f.get("practice") || "");
+      meta["hpcsa_number"] = String(f.get("hpcsa") || "");
+      meta["specialty"] = String(f.get("specialty") || "");
+      meta["practice_name"] = String(f.get("practice") || "");
     }
     setLoading(true);
     const { data, error } = await supabase.auth.signUp({
