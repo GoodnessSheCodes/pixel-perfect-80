@@ -6,7 +6,7 @@ import { PageHeader, Empty } from "@/components/AppShell";
 import { Card, RxStatus } from "@/components/RecordBits";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const Route = createFileRoute("/_authenticated/patient/prescriptions")({
+export const Route = createFileRoute("/_authenticated/patient/prescriptions/")({
   head: () => ({ meta: [{ title: "My prescriptions — MediVault AI" }] }),
   component: PrescriptionsPage,
 });
