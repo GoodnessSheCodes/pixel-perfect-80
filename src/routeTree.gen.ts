@@ -15,6 +15,8 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDoctorRouteImport } from './routes/_authenticated/doctor'
 import { Route as AuthenticatedPatientRouteImport } from './routes/_authenticated/patient'
+import { Route as AuthenticatedDoctorIndexRouteImport } from './routes/_authenticated/doctor.index'
+import { Route as AuthenticatedDoctorSearchRouteImport } from './routes/_authenticated/doctor.search'
 import { Route as AuthenticatedPatientIndexRouteImport } from './routes/_authenticated/patient.index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -46,6 +48,18 @@ const AuthenticatedPatientRoute = AuthenticatedPatientRouteImport.update({
   path: '/patient',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDoctorIndexRoute =
+  AuthenticatedDoctorIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDoctorRoute,
+  } as any)
+const AuthenticatedDoctorSearchRoute =
+  AuthenticatedDoctorSearchRouteImport.update({
+    id: '/search',
+    path: '/search',
+    getParentRoute: () => AuthenticatedDoctorRoute,
+  } as any)
 const AuthenticatedPatientIndexRoute =
   AuthenticatedPatientIndexRouteImport.update({
     id: '/',
@@ -57,15 +71,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRoute
-  '/doctor': typeof AuthenticatedDoctorRoute
+  '/doctor': typeof AuthenticatedDoctorRouteWithChildren
   '/patient': typeof AuthenticatedPatientRouteWithChildren
+  '/doctor/search': typeof AuthenticatedDoctorSearchRoute
+  '/doctor/': typeof AuthenticatedDoctorIndexRoute
   '/patient/': typeof AuthenticatedPatientIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRoute
-  '/doctor': typeof AuthenticatedDoctorRoute
+  '/doctor/search': typeof AuthenticatedDoctorSearchRoute
+  '/doctor': typeof AuthenticatedDoctorIndexRoute
   '/patient': typeof AuthenticatedPatientIndexRoute
 }
 export interface FileRoutesById {
@@ -74,15 +91,25 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
-  '/_authenticated/doctor': typeof AuthenticatedDoctorRoute
+  '/_authenticated/doctor': typeof AuthenticatedDoctorRouteWithChildren
   '/_authenticated/patient': typeof AuthenticatedPatientRouteWithChildren
+  '/_authenticated/doctor/search': typeof AuthenticatedDoctorSearchRoute
+  '/_authenticated/doctor/': typeof AuthenticatedDoctorIndexRoute
   '/_authenticated/patient/': typeof AuthenticatedPatientIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/admin' | '/doctor' | '/patient' | '/patient/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/admin'
+    | '/doctor'
+    | '/patient'
+    | '/doctor/search'
+    | '/doctor/'
+    | '/patient/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/admin' | '/doctor' | '/patient'
+  to: '/' | '/auth' | '/admin' | '/doctor/search' | '/doctor' | '/patient'
   id:
     | '__root__'
     | '/'
@@ -91,6 +118,8 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/doctor'
     | '/_authenticated/patient'
+    | '/_authenticated/doctor/search'
+    | '/_authenticated/doctor/'
     | '/_authenticated/patient/'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +173,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPatientRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/doctor/': {
+      id: '/_authenticated/doctor/'
+      path: '/'
+      fullPath: '/doctor/'
+      preLoaderRoute: typeof AuthenticatedDoctorIndexRouteImport
+      parentRoute: typeof AuthenticatedDoctorRoute
+    }
+    '/_authenticated/doctor/search': {
+      id: '/_authenticated/doctor/search'
+      path: '/search'
+      fullPath: '/doctor/search'
+      preLoaderRoute: typeof AuthenticatedDoctorSearchRouteImport
+      parentRoute: typeof AuthenticatedDoctorRoute
+    }
     '/_authenticated/patient/': {
       id: '/_authenticated/patient/'
       path: '/'
@@ -153,6 +196,19 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedDoctorRouteChildren {
+  AuthenticatedDoctorSearchRoute: typeof AuthenticatedDoctorSearchRoute
+  AuthenticatedDoctorIndexRoute: typeof AuthenticatedDoctorIndexRoute
+}
+
+const AuthenticatedDoctorRouteChildren: AuthenticatedDoctorRouteChildren = {
+  AuthenticatedDoctorSearchRoute: AuthenticatedDoctorSearchRoute,
+  AuthenticatedDoctorIndexRoute: AuthenticatedDoctorIndexRoute,
+}
+
+const AuthenticatedDoctorRouteWithChildren =
+  AuthenticatedDoctorRoute._addFileChildren(AuthenticatedDoctorRouteChildren)
 
 interface AuthenticatedPatientRouteChildren {
   AuthenticatedPatientIndexRoute: typeof AuthenticatedPatientIndexRoute
@@ -167,13 +223,13 @@ const AuthenticatedPatientRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
-  AuthenticatedDoctorRoute: typeof AuthenticatedDoctorRoute
+  AuthenticatedDoctorRoute: typeof AuthenticatedDoctorRouteWithChildren
   AuthenticatedPatientRoute: typeof AuthenticatedPatientRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
-  AuthenticatedDoctorRoute: AuthenticatedDoctorRoute,
+  AuthenticatedDoctorRoute: AuthenticatedDoctorRouteWithChildren,
   AuthenticatedPatientRoute: AuthenticatedPatientRouteWithChildren,
 }
 
