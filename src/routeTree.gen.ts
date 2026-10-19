@@ -14,12 +14,15 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDoctorRouteImport } from './routes/_authenticated/doctor'
+import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
 import { Route as AuthenticatedPatientRouteImport } from './routes/_authenticated/patient'
 import { Route as AuthenticatedDoctorIndexRouteImport } from './routes/_authenticated/doctor.index'
 import { Route as AuthenticatedDoctorPrescriptionsRouteImport } from './routes/_authenticated/doctor.prescriptions'
 import { Route as AuthenticatedDoctorSearchRouteImport } from './routes/_authenticated/doctor.search'
 import { Route as AuthenticatedPatientIndexRouteImport } from './routes/_authenticated/patient.index'
+import { Route as AuthenticatedPatientAssistantRouteImport } from './routes/_authenticated/patient.assistant'
 import { Route as AuthenticatedPatientHistoryRouteImport } from './routes/_authenticated/patient.history'
+import { Route as AuthenticatedPatientPrivacyRouteImport } from './routes/_authenticated/patient.privacy'
 import { Route as AuthenticatedDoctorPatientIdRouteImport } from './routes/_authenticated/doctor.patient.$id'
 import { Route as AuthenticatedPatientPrescriptionsIndexRouteImport } from './routes/_authenticated/patient.prescriptions.index'
 import { Route as AuthenticatedPatientPrescriptionsIdRouteImport } from './routes/_authenticated/patient.prescriptions.$id'
@@ -48,6 +51,12 @@ const AuthenticatedDoctorRoute = AuthenticatedDoctorRouteImport.update({
   path: '/doctor',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedNotificationsRoute =
+  AuthenticatedNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPatientRoute = AuthenticatedPatientRouteImport.update({
   id: '/patient',
   path: '/patient',
@@ -77,10 +86,22 @@ const AuthenticatedPatientIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedPatientRoute,
   } as any)
+const AuthenticatedPatientAssistantRoute =
+  AuthenticatedPatientAssistantRouteImport.update({
+    id: '/assistant',
+    path: '/assistant',
+    getParentRoute: () => AuthenticatedPatientRoute,
+  } as any)
 const AuthenticatedPatientHistoryRoute =
   AuthenticatedPatientHistoryRouteImport.update({
     id: '/history',
     path: '/history',
+    getParentRoute: () => AuthenticatedPatientRoute,
+  } as any)
+const AuthenticatedPatientPrivacyRoute =
+  AuthenticatedPatientPrivacyRouteImport.update({
+    id: '/privacy',
+    path: '/privacy',
     getParentRoute: () => AuthenticatedPatientRoute,
   } as any)
 const AuthenticatedDoctorPatientIdRoute =
@@ -107,10 +128,13 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/doctor': typeof AuthenticatedDoctorRouteWithChildren
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/patient': typeof AuthenticatedPatientRouteWithChildren
   '/doctor/prescriptions': typeof AuthenticatedDoctorPrescriptionsRoute
   '/doctor/search': typeof AuthenticatedDoctorSearchRoute
+  '/patient/assistant': typeof AuthenticatedPatientAssistantRoute
   '/patient/history': typeof AuthenticatedPatientHistoryRoute
+  '/patient/privacy': typeof AuthenticatedPatientPrivacyRoute
   '/doctor/': typeof AuthenticatedDoctorIndexRoute
   '/patient/': typeof AuthenticatedPatientIndexRoute
   '/doctor/patient/$id': typeof AuthenticatedDoctorPatientIdRoute
@@ -121,9 +145,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/doctor/prescriptions': typeof AuthenticatedDoctorPrescriptionsRoute
   '/doctor/search': typeof AuthenticatedDoctorSearchRoute
+  '/patient/assistant': typeof AuthenticatedPatientAssistantRoute
   '/patient/history': typeof AuthenticatedPatientHistoryRoute
+  '/patient/privacy': typeof AuthenticatedPatientPrivacyRoute
   '/doctor': typeof AuthenticatedDoctorIndexRoute
   '/patient': typeof AuthenticatedPatientIndexRoute
   '/doctor/patient/$id': typeof AuthenticatedDoctorPatientIdRoute
@@ -137,10 +164,13 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/doctor': typeof AuthenticatedDoctorRouteWithChildren
+  '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/patient': typeof AuthenticatedPatientRouteWithChildren
   '/_authenticated/doctor/prescriptions': typeof AuthenticatedDoctorPrescriptionsRoute
   '/_authenticated/doctor/search': typeof AuthenticatedDoctorSearchRoute
+  '/_authenticated/patient/assistant': typeof AuthenticatedPatientAssistantRoute
   '/_authenticated/patient/history': typeof AuthenticatedPatientHistoryRoute
+  '/_authenticated/patient/privacy': typeof AuthenticatedPatientPrivacyRoute
   '/_authenticated/doctor/': typeof AuthenticatedDoctorIndexRoute
   '/_authenticated/patient/': typeof AuthenticatedPatientIndexRoute
   '/_authenticated/doctor/patient/$id': typeof AuthenticatedDoctorPatientIdRoute
@@ -154,10 +184,13 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin'
     | '/doctor'
+    | '/notifications'
     | '/patient'
     | '/doctor/prescriptions'
     | '/doctor/search'
+    | '/patient/assistant'
     | '/patient/history'
+    | '/patient/privacy'
     | '/doctor/'
     | '/patient/'
     | '/doctor/patient/$id'
@@ -168,9 +201,12 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/admin'
+    | '/notifications'
     | '/doctor/prescriptions'
     | '/doctor/search'
+    | '/patient/assistant'
     | '/patient/history'
+    | '/patient/privacy'
     | '/doctor'
     | '/patient'
     | '/doctor/patient/$id'
@@ -183,10 +219,13 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/admin'
     | '/_authenticated/doctor'
+    | '/_authenticated/notifications'
     | '/_authenticated/patient'
     | '/_authenticated/doctor/prescriptions'
     | '/_authenticated/doctor/search'
+    | '/_authenticated/patient/assistant'
     | '/_authenticated/patient/history'
+    | '/_authenticated/patient/privacy'
     | '/_authenticated/doctor/'
     | '/_authenticated/patient/'
     | '/_authenticated/doctor/patient/$id'
@@ -237,6 +276,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDoctorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/patient': {
       id: '/_authenticated/patient'
       path: '/patient'
@@ -272,11 +318,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPatientIndexRouteImport
       parentRoute: typeof AuthenticatedPatientRoute
     }
+    '/_authenticated/patient/assistant': {
+      id: '/_authenticated/patient/assistant'
+      path: '/assistant'
+      fullPath: '/patient/assistant'
+      preLoaderRoute: typeof AuthenticatedPatientAssistantRouteImport
+      parentRoute: typeof AuthenticatedPatientRoute
+    }
     '/_authenticated/patient/history': {
       id: '/_authenticated/patient/history'
       path: '/history'
       fullPath: '/patient/history'
       preLoaderRoute: typeof AuthenticatedPatientHistoryRouteImport
+      parentRoute: typeof AuthenticatedPatientRoute
+    }
+    '/_authenticated/patient/privacy': {
+      id: '/_authenticated/patient/privacy'
+      path: '/privacy'
+      fullPath: '/patient/privacy'
+      preLoaderRoute: typeof AuthenticatedPatientPrivacyRouteImport
       parentRoute: typeof AuthenticatedPatientRoute
     }
     '/_authenticated/doctor/patient/$id': {
@@ -321,14 +381,18 @@ const AuthenticatedDoctorRouteWithChildren =
   AuthenticatedDoctorRoute._addFileChildren(AuthenticatedDoctorRouteChildren)
 
 interface AuthenticatedPatientRouteChildren {
+  AuthenticatedPatientAssistantRoute: typeof AuthenticatedPatientAssistantRoute
   AuthenticatedPatientHistoryRoute: typeof AuthenticatedPatientHistoryRoute
+  AuthenticatedPatientPrivacyRoute: typeof AuthenticatedPatientPrivacyRoute
   AuthenticatedPatientIndexRoute: typeof AuthenticatedPatientIndexRoute
   AuthenticatedPatientPrescriptionsIdRoute: typeof AuthenticatedPatientPrescriptionsIdRoute
   AuthenticatedPatientPrescriptionsIndexRoute: typeof AuthenticatedPatientPrescriptionsIndexRoute
 }
 
 const AuthenticatedPatientRouteChildren: AuthenticatedPatientRouteChildren = {
+  AuthenticatedPatientAssistantRoute: AuthenticatedPatientAssistantRoute,
   AuthenticatedPatientHistoryRoute: AuthenticatedPatientHistoryRoute,
+  AuthenticatedPatientPrivacyRoute: AuthenticatedPatientPrivacyRoute,
   AuthenticatedPatientIndexRoute: AuthenticatedPatientIndexRoute,
   AuthenticatedPatientPrescriptionsIdRoute:
     AuthenticatedPatientPrescriptionsIdRoute,
@@ -342,12 +406,14 @@ const AuthenticatedPatientRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedDoctorRoute: typeof AuthenticatedDoctorRouteWithChildren
+  AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedPatientRoute: typeof AuthenticatedPatientRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedDoctorRoute: AuthenticatedDoctorRouteWithChildren,
+  AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedPatientRoute: AuthenticatedPatientRouteWithChildren,
 }
 
