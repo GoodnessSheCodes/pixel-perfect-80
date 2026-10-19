@@ -39,9 +39,9 @@ function AuthPage() {
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email: String(f.get("email")), password: String(f.get("password")) });
     setLoading(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Signed in");
-    goHome();
+    void goHome();
   }
 
   async function signUp(e: React.FormEvent<HTMLFormElement>) {

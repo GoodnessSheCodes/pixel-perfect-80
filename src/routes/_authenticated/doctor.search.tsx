@@ -41,7 +41,7 @@ function DoctorSearch() {
       const { data, error } = await supabase.rpc("request_access", {
         _patient: selected!.patient_id,
         _dob: dob,
-        _share_code: shareCode || undefined,
+        ...(shareCode ? { _share_code: shareCode } : {}),
       });
       if (error) throw error;
       return data as string;
