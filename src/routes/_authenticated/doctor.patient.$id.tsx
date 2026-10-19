@@ -71,7 +71,7 @@ function PatientRecord() {
     mutationFn: async () => {
       const { error } = await supabase.rpc("issue_prescription", {
         _patient: id,
-        _consultation: rxConsult || null,
+        _consultation: (rxConsult || null) as string,
         _notes: rxNotes,
         _items: items as never,
       });
