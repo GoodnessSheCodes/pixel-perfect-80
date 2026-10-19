@@ -40,7 +40,7 @@ function PrescriptionDetail() {
           <Button variant="outline" size="sm" onClick={() => downloadRx(rx, me?.profile?.full_name)}><Download />Download</Button>
         </div>
       </div>
-      <RxDocument rx={rx} patientName={me?.profile?.full_name} patientCode={patient.data?.patient_code} />
+      <RxDocument rx={rx} patientName={me?.profile?.full_name ?? ""} patientCode={patient.data?.patient_code ?? ""} />
     </div>
   );
 }
