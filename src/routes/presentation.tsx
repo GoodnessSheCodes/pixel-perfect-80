@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ScaledSlide, Slide, slides } from "@/presentation/Slide";
 
 export const Route = createFileRoute("/presentation")({
-  validateSearch: (search: Record<string, unknown>) => ({ slide: Math.min(slides.length, Math.max(1, Number(search.slide) || 1)), print: search.print === true || search.print === "true" }),
+  validateSearch: (search: Record<string, unknown>) => ({ slide: Math.min(slides.length, Math.max(1, Number(search["slide"]) || 1)), print: search["print"] === true || search["print"] === "true" }),
   head: () => ({ meta: [
     { title: "Stakeholder presentation — MediVault AI" },
     { name: "description", content: "A stakeholder briefing on MediVault AI’s patient-controlled health records prototype, demo journey and readiness boundaries." },
