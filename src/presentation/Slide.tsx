@@ -16,7 +16,7 @@ export function Slide({ index }: { index: number }) {
     <div className="mv-slide-main">
       <h1 className={index === 0 ? "mv-slide-brand" : "mv-slide-title"}>{s.title}</h1>
       <p className="mv-slide-subtitle">{s.subtitle}</p>
-      <div className={`mv-slide-points ${index === 3 ? "mv-slide-process" : ""}`}>{s.points.map((p, i) => <div key={p} className="mv-slide-point"><span className="mv-point-mark">{index === 3 ? String(i + 1).padStart(2, "0") : <Icon size={40} />}</span><p>{p}</p></div>)}</div>
+      <div className={`mv-slide-points ${index === 3 ? "mv-slide-process" : ""}`}>{s.points.map((p, i) => <div key={p} className="mv-slide-point"><span className="mv-point-mark">{index === 3 ? String(i + 1).padStart(2, "0") : <Icon size={40} />}</span><p>{index === 3 ? p.replace(/^\d+ · /, "") : p}</p></div>)}</div>
     </div>
     <footer className="mv-slide-footer"><span>Fictional demonstration data · Not for clinical use{index === 0 ? " · Illustrative generated photograph" : ""}</span><span>{String(index + 1).padStart(2, "0")} / {slides.length}</span></footer>
   </article>;
