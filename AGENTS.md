@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Stakeholder slides live separately at `/presentation`, with one JSON content registry and one fixed-resolution slide renderer; this preserves clinical workflows and keeps screen/print content consistent.
