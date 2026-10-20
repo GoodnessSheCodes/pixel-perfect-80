@@ -1,0 +1,91 @@
+[
+  {
+    "title": "MediVault AI",
+    "kicker": "Stakeholder briefing \u00b7 South Africa",
+    "subtitle": "Patient-controlled health records & digital prescriptions",
+    "points": [
+      "A working prototype using fictional records.",
+      "Presented by Mbali Mazibuko \u00b7 20 October 2026"
+    ],
+    "notes": "Open: Today I will show how one patient can carry her history between doctors, control access, and understand what is recorded. This is a prototype, not a clinical service."
+  },
+  {
+    "title": "The record should travel with the patient",
+    "kicker": "The problem",
+    "subtitle": "Fragmented information interrupts continuity of care.",
+    "points": [
+      "Paper histories and prescriptions can be lost or unavailable.",
+      "A new doctor may not have the patient\u2019s previous consultation context.",
+      "Patients need both control over sharing and understandable records."
+    ],
+    "notes": "Describe these as the problem we are addressing, not measured research findings. We have not yet quantified time savings or clinical outcomes."
+  },
+  {
+    "title": "One record. Permission before access.",
+    "kicker": "The approach",
+    "subtitle": "A connected patient and doctor workflow.",
+    "points": [
+      "Patient: history, prescriptions, notifications and privacy controls.",
+      "Doctor: find a patient, verify identity and request access.",
+      "Verified doctor: record a consultation and issue a digital prescription."
+    ],
+    "notes": "Position the solution as patient-controlled. Show that the doctor workflow starts with identity checks and consent rather than browsing everyone\u2019s records."
+  },
+  {
+    "title": "Follow Thandi\u2019s visit",
+    "kicker": "Live demonstration",
+    "subtitle": "A fictional patient, a verified doctor, a visible handover.",
+    "points": [
+      "01 \u00b7 Thandi shows her history and patient ID.",
+      "02 \u00b7 Dr Naidoo finds her and obtains access.",
+      "03 \u00b7 The doctor records the visit and reviews a prescription.",
+      "04 \u00b7 Thandi receives it and asks for a plain-language explanation."
+    ],
+    "notes": "Switch to the app. Use the separate demo script for exact clicks. Keep the one-time code out of recordings after the demo. Demonstration data only."
+  },
+  {
+    "title": "Trust must be visible",
+    "kicker": "Prototype safeguards",
+    "subtitle": "Controls designed into the workflow\u2014not a compliance certification.",
+    "points": [
+      "Patient approval and revocation of doctor access.",
+      "Verification gate before clinical writing.",
+      "Issued records protected from ordinary patient edits.",
+      "Audit trail for key sensitive actions."
+    ],
+    "notes": "These are implemented design controls, not a claim that the system is production-secure or POPIA-certified. Independent security testing and legal assessment are still needed."
+  },
+  {
+    "title": "AI explains. It does not prescribe.",
+    "kicker": "Patient understanding",
+    "subtitle": "An assistant grounded in the patient\u2019s own records.",
+    "points": [
+      "Explain medical terms and summarise recorded history.",
+      "Prepare questions for the next doctor visit.",
+      "No new diagnosis or dosage changes; emergency guidance directs to urgent help."
+    ],
+    "notes": "Explain that AI can be incomplete or wrong. Show the AI-generated label. If the response indicates demo mode, say it is a fallback, not a live model answer. A clinician remains responsible for care."
+  },
+  {
+    "title": "Prototype today. Clinical readiness next.",
+    "kicker": "Readiness boundaries",
+    "subtitle": "No real patient data and no dispensing from these prescriptions.",
+    "points": [
+      "Demonstrable now: patient and doctor workflows, access controls, digital records.",
+      "Before clinical use: legal/privacy review, security assessment and operational safeguards.",
+      "Before prescribing rollout: real HPCSA verification, signatures and pharmacy integration."
+    ],
+    "notes": "Do not claim legal compliance, validated clinical outcomes, or a pharmacy-ready prescription. Production readiness, costs and implementation timeline have not yet been validated."
+  },
+  {
+    "title": "Agree the next validation step",
+    "kicker": "Stakeholder discussion",
+    "subtitle": "Proposed ask: support a scoped discovery and validation phase.",
+    "points": [
+      "Nominate clinical, privacy and operational reviewers.",
+      "Define success criteria and test the workflow with fictional cases.",
+      "Agree a responsible pilot scope only after the readiness gaps are addressed."
+    ],
+    "notes": "Close: Does this workflow solve a meaningful continuity-of-care problem for your setting? What evidence would you need before supporting a pilot? This is a proposed discussion ask, not a budget or approval already secured."
+  }
+]
