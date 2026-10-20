@@ -15,6 +15,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Store your medical history in one secure place, receive digital prescriptions from authorised doctors, and understand your records with AI." },
       { property: "og:title", content: "MediVault AI — Your health record, in one place" },
       { property: "og:description", content: "Patient-controlled health records and digital prescriptions for South Africa." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Landing,
@@ -49,7 +51,7 @@ function Landing() {
         <div className="mx-auto max-w-6xl px-4 pb-20 pt-6">
           <nav className="flex items-center justify-between">
             <span className="flex items-center gap-2 font-display text-lg font-bold"><ShieldPlus className="h-6 w-6" /> MediVault AI</span>
-            <Button asChild variant="heroOutline" size="sm"><Link to="/auth">Sign in</Link></Button>
+            <div className="flex gap-2"><Button asChild variant="heroOutline" size="sm"><Link to="/presentation" search={{ slide: 1, print: false }}>Stakeholder slides</Link></Button><Button asChild variant="heroOutline" size="sm"><Link to="/auth">Sign in</Link></Button></div>
           </nav>
           <div className="mt-20 max-w-2xl">
             <p className="mb-4 inline-block rounded-full bg-primary-foreground/10 px-3 py-1 text-xs font-medium">Built for South African healthcare · POPIA-aligned principles</p>
